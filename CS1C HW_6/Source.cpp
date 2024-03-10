@@ -49,6 +49,7 @@ int main()
 
 				cout << "Area of circle: " << shapePtr->calcArea();
 				cout << endl << endl;
+				break;
 
 			case 'R':
 				cout << "Enter length: ";
@@ -59,14 +60,18 @@ int main()
 
 				shapePtr = new Rectangle(height, width);
 
-				cout << "Area of rectangle: " << shapePtr->calcArea()
+				cout << "Area of rectangle: " << shapePtr->calcArea();
+				cout << endl << endl;
+				break;
 			}
 		}
+
+		shapeSelection = ShapeMenu();
+		cout << "Do you want to continue (y/n)? ";
+		cin.get(cont);
+		cin.ignore();
 	}
 
-	cout << "Do you want to continue (y/n)? ";
-	cin.get(cont);
-	cin.ignore();
 
 	return 0;
 }
