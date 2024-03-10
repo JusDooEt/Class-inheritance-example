@@ -5,10 +5,11 @@
 * Class: CS 1C M/W 10:30a
 *************************************************/
 
-#include "Shape.h"
+#include "Circle.h"
+#include "Rectangle.h"
 
 char ShapeMenu();
-bool ValidateChar(char selection, char validChoices[], int ArSize);
+bool ValidateChar(char selection, const char validChoices[], int ArSize);
 
 int main()
 {
@@ -19,10 +20,53 @@ int main()
 	const char VALID_CHOICES[NUM_CHOICES] = { 'Y', 'N' };
 
 	// Variables
+	double height;	//also used as base for triangles and length
+	double width;
+	double radius;
 	Shape* shapePtr;
 	char   shapeSelection;
+	char   cont;
+
+	cont = 'Y';
 
 	shapeSelection = ShapeMenu();
+	while(toupper(cont) == 'Y')
+	{
+		if (!ValidateChar(shapeSelection, VALID_SHAPES, NUM_SHAPES))
+		{
+			cout << "Invalid entry... must be C, R, T.\n\n";
+		}
+		else
+		{
+			switch (shapeSelection)
+			{
+			case 'C': 
+				cout << "Enter radius: ";
+				cin >> radius;
+				cin.ignore();
+
+				shapePtr = new Circle(radius);
+
+				cout << "Area of circle: " << shapePtr->calcArea();
+				cout << endl << endl;
+
+			case 'R':
+				cout << "Enter length: ";
+				cin >> height;
+				cout << "Enter width: ";
+				cin >> width;
+				cin.ignore();
+
+				shapePtr = new Rectangle(height, width);
+
+				cout << "Area of rectangle: " << shapePtr->calcArea()
+			}
+		}
+	}
+
+	cout << "Do you want to continue (y/n)? ";
+	cin.get(cont);
+	cin.ignore();
 
 	return 0;
 }
@@ -40,10 +84,10 @@ char ShapeMenu()
 	cout << "Enter C, R or T: ";
 	cin.get(shapeSelection);
 	cin.ignore();
-	return shapeSelection;
+	return toupper(shapeSelection);
 }
 
-bool ValidateChar(char selection, char validChoices[], int ArSize)
+bool ValidateChar(char selection, const char validChoices[], int ArSize)
 {
 	bool valid = false;
 
