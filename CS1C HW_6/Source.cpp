@@ -7,6 +7,7 @@
 
 #include "Circle.h"
 #include "Rectangle.h"
+#include "Triangle.h"
 
 char ShapeMenu();
 bool ValidateChar(char selection, const char validChoices[], int ArSize);
@@ -25,13 +26,14 @@ int main()
 	double radius;
 	Shape* shapePtr;
 	char   shapeSelection;
-	char   cont;
+	char   refresh;
 
-	cont = 'Y';
-
-	shapeSelection = ShapeMenu();
-	while(toupper(cont) == 'Y')
+	refresh = 'Y';
+	
+	
+	while(toupper(refresh) == 'Y')
 	{
+		shapeSelection = ShapeMenu();
 		if (!ValidateChar(shapeSelection, VALID_SHAPES, NUM_SHAPES))
 		{
 			cout << "Invalid entry... must be C, R, T.\n\n";
@@ -49,6 +51,9 @@ int main()
 
 				cout << "Area of circle: " << shapePtr->calcArea();
 				cout << endl << endl;
+				delete shapePtr;
+				shapePtr = NULL;
+				break;
 
 			case 'R':
 				cout << "Enter length: ";
@@ -59,14 +64,46 @@ int main()
 
 				shapePtr = new Rectangle(height, width);
 
-				cout << "Area of rectangle: " << shapePtr->calcArea()
+				cout << "Area of rectangle: " << shapePtr->calcArea();
+				cout << endl << endl;
+				delete shapePtr;
+				shapePtr = NULL;
+				break;
+
+			case 'T':
+				cout << "Enter base: ";
+				cin >> width;
+				cout << "Enter height: ";
+				cin >> height;
+				cin.ignore();
+
+				shapePtr = new Triangle(width, height);
+
+				cout << "Area of triangle: " << shapePtr->calcArea();
+				cout << endl << endl;
+				delete shapePtr;
+				shapePtr = NULL;
+				break;
 			}
 		}
+
+
+		cout << "Do you want to continue (y/n)? ";
+		cin.get(refresh);
+		cin.ignore();
+		if (!ValidateChar(refresh, VALID_CHOICES, NUM_CHOICES))
+		{
+			do
+			{
+				cout << "\n\t<Please enter 'y' or 'n' to continue or exit the program>\n\n";
+				cout << "Do you want to continue (y/n)? ";
+				cin.get(refresh);
+				cin.ignore();
+			} while (!ValidateChar(refresh, VALID_CHOICES, NUM_CHOICES));
+		}
+		system("cls");
 	}
 
-	cout << "Do you want to continue (y/n)? ";
-	cin.get(cont);
-	cin.ignore();
 
 	return 0;
 }

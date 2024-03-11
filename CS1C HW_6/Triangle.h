@@ -1,5 +1,5 @@
 /*************************************************
-* Program: HW_6 - Rectangle.h
+* Program: HW_6 - Triangle.h
 * ================================================
 * Programmer: Cameron Abo
 * Class: CS 1C M/W 10:30a
