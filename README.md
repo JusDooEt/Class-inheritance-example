@@ -7,4 +7,4 @@ on a class by class basis. The program will ask the user to choose a shape and w
 find the area using the calcArea public member function.
 
 ## Current Build
-![Current Build Image](images/CurrentBuild.png)
+![Current Build Image](images/CurrentBuild.PNG)
